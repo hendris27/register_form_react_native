@@ -4,6 +4,7 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  Form,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
@@ -109,69 +110,71 @@ const Home = () => {
   };
 
   return (
-    <View style={styles.wrapper}>
-      <View style={styles.wrappTitle}>
-        <View>
-          <Icon name="addusergroup" color="white" size={40} />
+    <>
+      <Form style={styles.wrapper}>
+        <View style={styles.wrappTitle}>
+          <View>
+            <Icon name="addusergroup" color="white" size={40} />
+          </View>
+
+          <View style={styles.wrappText}>
+            <Text style={styles.title}>React Native</Text>
+
+            <Text style={styles.title}>User Registration Form</Text>
+          </View>
         </View>
 
-        <View style={styles.wrappText}>
-          <Text style={styles.title}>React Native</Text>
+        <View style={styles.wrapperField}>
+          <View>
+            <TextInput style={styles.inputfield} placeholder="Nama Lengkap" />
+          </View>
+          <View style={styles.containerSelect}>
+            <Picker
+              selectedValue={selectedProvince}
+              onValueChange={itemValue => handleProvinceChange(itemValue)}>
+              <Picker.Item label="Provinsi" value="" />
+              {provinces.map(province => (
+                <Picker.Item
+                  key={province.id}
+                  label={province.name}
+                  value={province.id}
+                />
+              ))}
+            </Picker>
+          </View>
 
-          <Text style={styles.title}>User Registration Form</Text>
-        </View>
-      </View>
+          <View style={styles.containerSelect}>
+            <Picker
+              selectedValue={selectedCity}
+              onValueChange={itemValue => handleCityChange(itemValue)}>
+              <Picker.Item label="Kota" value="" />
+              {cities.map(city => (
+                <Picker.Item key={city.id} label={city.name} value={city.id} />
+              ))}
+            </Picker>
+          </View>
 
-      <View style={styles.wrapperField}>
-        <View>
-          <TextInput style={styles.inputfield} placeholder="Nama Lengkap" />
+          <View style={styles.containerSelect}>
+            <Picker
+              style={styles.selectfield}
+              selectedValue={selectedDistrict}
+              onValueChange={itemValue => handleDistrictChange(itemValue)}>
+              <Picker.Item label="Kecamatan" value="" />
+              {districts.map(district => (
+                <Picker.Item
+                  key={district.id}
+                  label={district.name}
+                  value={district.id}
+                />
+              ))}
+            </Picker>
+          </View>
+          <TouchableOpacity style={styles.btnfield}>
+            <Text>Register</Text>
+          </TouchableOpacity>
         </View>
-        <View style={styles.containerSelect}>
-          <Picker
-            selectedValue={selectedProvince}
-            onValueChange={itemValue => handleProvinceChange(itemValue)}>
-            <Picker.Item label="Provinsi" value="" />
-            {provinces.map(province => (
-              <Picker.Item
-                key={province.id}
-                label={province.name}
-                value={province.id}
-              />
-            ))}
-          </Picker>
-        </View>
-
-        <View style={styles.containerSelect}>
-          <Picker
-            selectedValue={selectedCity}
-            onValueChange={itemValue => handleCityChange(itemValue)}>
-            <Picker.Item label="Kota" value="" />
-            {cities.map(city => (
-              <Picker.Item key={city.id} label={city.name} value={city.id} />
-            ))}
-          </Picker>
-        </View>
-
-        <View style={styles.containerSelect}>
-          <Picker
-            style={styles.selectfield}
-            selectedValue={selectedDistrict}
-            onValueChange={itemValue => handleDistrictChange(itemValue)}>
-            <Picker.Item label="Kecamatan" value="" />
-            {districts.map(district => (
-              <Picker.Item
-                key={district.id}
-                label={district.name}
-                value={district.id}
-              />
-            ))}
-          </Picker>
-        </View>
-        <TouchableOpacity style={styles.btnfield}>
-          <Text>Register</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+      </Form>
+    </>
   );
 };
 
